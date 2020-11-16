@@ -3,24 +3,71 @@
 <html>
     <head>
         <title>Rock Paper Scissors</title>
-        <style>
-            h1 {
-                display: flex;
-                justify-content: center;
-                margin: auto;
-                padding-bottom: 50px;
-            }
-
-            button {
-                display: flex;
-                justify-content: center;
-                margin: auto;
-
-                padding: 10px 50px 10px 50px;
-
-            }
-        </style>
+        <link rel='stylesheet' href='styles.css'>
     </head>
+
+    <h1>Play Rock Paper Scissors</h1>
+
+    <div class = 'num-games'>
+        <label for="num-games">Number of Games</label>
+
+        <select name="num-games" id="num-games" onchange = 'reset()'>
+            <option value = '1'>1</option>
+            <option value = '3'>3</option>
+            <option value = '5'>5</option>
+            <option value = '7'>7</option>
+        </select>
+    </div>
+
+    <div class = 'win-screen'></div>
+
+    <div class = 'main'>
+
+        <h2>Choose One</h2>
+
+        <div id='play-buttons'>
+            <button type = "button" onclick = "game(this)" value = 'Rock'><img src = 'rock.png'></button>
+            <button type = "button" onclick = "game(this)" value = "Paper"><img src = 'paper.png'></button>
+            <button type = "button" onclick = "game(this)" value = 'Scissors'><img src = 'scissors.png'></button>
+        </div>
+
+        <div class = 'play-area'>
+
+            <div>
+                <h3>Player Choice</h3>
+                <p id = 'player-choice'></p>
+            </div>
+
+            <div>
+                <h3>Computer Choice</h3>
+                <p id = 'computer-choice'></p>
+            </div>
+
+        </div>
+
+        <div >
+            <div class = 'results'></div>
+            <div class = 'score-box'>
+                <h2>Score</h2>
+
+                <div class = 'player-names'>
+                    <p id = 'human'>Human</p>
+                    <p id = 'computer'>Computer</p>
+                </div>
+                
+                <div class = 'scores'>
+                    
+                    <p id = 'human-score'>0</p>
+                    <p id = 'computer-score'>0</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+        <div id = 'reset-button'>
+            <button type = 'button' onClick = "reset()">Reset</button>
+        </div>
 
     <script>
 
@@ -39,18 +86,6 @@
 
         function play(playerSelection, computerSelection){
             if (playerSelection == "Rock" && computerSelection == "Scissors" || playerSelection == "Paper" && computerSelection == "Rock" || playerSelection == "Scissors" && computerSelection == "Paper"){
-                return "You Win! " + playerSelection + " beats " + computerSelection;
-            }
-            else if (playerSelection == "Rock" && computerSelection == "Paper" || playerSelection == "Paper" && computerSelection == "Scissors" || playerSelection == "Scissors" && computerSelection == "Rock"){
-                return "You Lose! " + computerSelection + " beats " + playerSelection;
-            }
-            else{
-                return "It's a tie!";
-            }
-        }
-
-        function play(playerSelection, computerSelection){
-            if (playerSelection == "Rock" && computerSelection == "Scissors" || playerSelection == "Paper" && computerSelection == "Rock" || playerSelection == "Scissors" && computerSelection == "Paper"){
                 return 1;
             }
             else if (playerSelection == "Rock" && computerSelection == "Paper" || playerSelection == "Paper" && computerSelection == "Scissors" || playerSelection == "Scissors" && computerSelection == "Rock"){
@@ -61,45 +96,108 @@
             }
         }
 
-        function game() {
+        function game(button_clicked) {
 
-            let playerWins = 0;
-            let computerWins = 0;
+            let playerPoints = 0;
+            let computerPoints = 0;
 
-            for (let i = 0; i < 5; i++){
-                let input = prompt("Enter 'Rock', 'Paper' or 'Scissors'");
+            const container = document.querySelector('.results');
+            container.textContent = "";
 
-                let playerSelection = input.charAt(0).toUpperCase() + input.slice(1);;
-                let computerSelection = computerPlay();
+            const human_score = document.querySelector('#human-score');
+            const computer_score = document.querySelector('#computer-score');
 
-                result = play(playerSelection, computerSelection);
+            const human_choice = document.querySelector('#player-choice');
+            human_choice.textContent = "";
+            const computer_choice = document.querySelector('#computer-choice');
+            computer_choice.textContent = "";
 
-                if(result == 1){
-                    playerWins++;
-                    console.log("You win this round! \n You chose " + playerSelection + " and the computer chose " + computerSelection);
-                }
-                else if (result == 0){
-                    computerWins++;
-                    console.log("You lose this round. \n You chose " + playerSelection + " and the computer chose " + computerSelection);
-                }
-                else {
-                    i--;
-                    console.log("It was a tie!");
-                }
+            const compChoice = document.createElement('p');
+            compChoice.classList.add('center-align');
+
+            const results = document.createElement('p');
+            results.classList.add('center-align');
+            
+            const playerSelection = button_clicked.value;
+            const computerSelection = computerPlay();
+
+            const num_games = document.querySelector('#num-games').value;
+
+            result = play(playerSelection, computerSelection);
+
+            human_image = new Image();
+            computer_image = new Image();
+
+            if(result == 1){
+                console.log("You win this round! \nYou chose " + playerSelection + " and the computer chose " + computerSelection);
+                results.textContent = 'You Win';
+                human_image.src = playerSelection.toLowerCase() + '.png';
+                computer_image.src = computerSelection.toLowerCase() + '.png';
+                human_choice.appendChild(human_image);
+                computer_choice.appendChild(computer_image);
+                container.appendChild(compChoice);
+                container.appendChild(results);
+                human_score.textContent = (parseInt(human_score.textContent) + 1).toString()
             }
-
-            if (playerWins > computerWins){
-                console.log("You win with " + playerWins + " wins. The computer had " + computerWins + " wins.");
+            else if (result == 0){
+                console.log("You lose this round. \nYou chose " + playerSelection + " and the computer chose " + computerSelection);
+                results.textContent = 'You Lose';
+                human_image.src = playerSelection.toLowerCase() + '.png';
+                computer_image.src = computerSelection.toLowerCase() + '.png';
+                human_choice.appendChild(human_image);
+                computer_choice.appendChild(computer_image);
+                container.appendChild(compChoice);
+                container.appendChild(results);
+                computer_score.textContent = (parseInt(computer_score.textContent) + 1).toString()
             }
             else {
-                console.log("You lose with " + playerWins + " wins. The computer had " + computerWins + " wins.");
+                console.log("It was a tie!");
+                results.textContent = "It's a tie";
+                human_image.src = playerSelection.toLowerCase() + '.png';
+                computer_image.src = computerSelection.toLowerCase() + '.png';
+                human_choice.appendChild(human_image);
+                computer_choice.appendChild(computer_image);
+                container.appendChild(compChoice);
+                container.appendChild(results);
             }
 
+            checkWin(num_games, (parseInt(human_score.textContent)), (parseInt(computer_score.textContent)));
         }
+
+        function checkWin(num_games, human_wins, computer_wins) {
+
+            if(num_games - human_wins < human_wins) {
+                main = document.querySelector('.main').style.display = "none";
+                win_screen = document.querySelector('.win-screen');
+                win_screen.textContent = 'You Win';
+            }
+            else if (num_games - computer_wins < computer_wins) {
+                main = document.querySelector('.main').style.display = "none";
+                win_screen = document.querySelector('.win-screen');
+                win_screen.textContent = 'You Lose';
+            }
+        }
+
+        function reset() {
+
+            const container = document.querySelector('.results');
+            const human_score = document.querySelector('#human-score');
+            const computer_score = document.querySelector('#computer-score');
+
+            main = document.querySelector('.main').style.display = "block";
+
+            win_screen = document.querySelector('.win-screen');
+            win_screen.textContent = '';
+    
+            container.textContent = "";
+            human_score.textContent = 0;
+            computer_score.textContent = 0;
+            const human_choice = document.querySelector('#player-choice');
+            human_choice.textContent = "";
+            const computer_choice = document.querySelector('#computer-choice');
+            computer_choice.textContent = "";
+            }
         
     </script>
-
-    <h1>Play Rock Paper Scissors</h1>
-    <button type = "button" onclick = "game()">Play</button>
 
 </html>

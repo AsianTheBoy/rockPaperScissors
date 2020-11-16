@@ -1,0 +1,141 @@
+
+h1 {
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    margin-top: 50px;
+    padding-bottom: 50px;
+}
+
+.main h2 {
+    display: flex;
+    justify-content: center;
+}
+
+.num-games {
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    margin-top: 5px;
+}
+
+.win-screen {
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    margin-top: 25px;
+    font-size: 50px;
+    font-weight: bold;
+}
+
+button {
+    padding: 10px 50px 10px 50px;
+}
+
+.play-area {
+    display: flex;
+    justify-content: space-between;
+    width: 25%;
+    margin: auto;
+    margin-top: 50px;
+    text-align: center;
+    border: 1px solid black;
+    border-radius: 1rem;
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
+.results {
+    font-weight: bold;
+}
+
+#play-buttons {
+    margin-top: 25px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#play-buttons h3 {
+    margin-left: 20px;
+}
+
+#play-buttons button {
+    margin-top: 25px;
+    margin-left: 10px;
+    margin-right: 10px;
+    padding: 10px 50px 10px 50px;
+    border-radius: 1rem;
+}
+
+#play-buttons button:focus {
+    outline: none;
+}
+
+.center-align {
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    margin-top: 25px;
+}
+
+.score-box {
+    margin: auto;
+    margin-top: 25px;
+    border: 1px solid black;
+    border-radius: 1rem;
+    width: 300px;
+    height: 200px;
+}
+
+.score-box h2 {
+    text-align: center;
+    text-decoration: underline;
+}
+
+.player-names {
+    display: flex;
+    justify-content: space-between;
+}
+
+.player-names #human {
+    font-weight: bold;
+    margin-left: 50px;
+}
+
+.player-names #computer {
+    font-weight: bold;
+    margin-right: 50px;
+}
+
+.scores {
+    display: flex;
+    justify-content: space-between;
+}
+
+#human-score {
+    text-align: center;
+    line-height: 50px;
+    margin-left: 50px;
+    width: 50px;
+    height: 50px;
+    font-size: 50px;
+    margin-top: 0px;
+}
+
+#computer-score {
+    text-align: center;
+    line-height: 50px;
+    margin-right: 50px;
+    width: 50px;
+    height: 50px;
+    font-size: 50px;
+    margin-top: 0px;
+}
+
+#reset-button {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 25px;
+}
