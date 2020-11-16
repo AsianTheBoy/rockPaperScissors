@@ -7,16 +7,26 @@ h1 {
     padding-bottom: 50px;
 }
 
-.main h2 {
-    display: flex;
-    justify-content: center;
-}
-
 .num-games {
     display: flex;
     justify-content: center;
     margin: auto;
     margin-top: 5px;
+}
+
+.num-games label {
+    padding-right: 5px;
+}
+
+.num-games select {
+    border-radius: 5px;
+    width: 50px;
+    border: 1px solid transparent;
+    box-shadow: 0px 0px 3px rgb(85, 85, 85);
+}
+
+.num-games select:focus {
+    outline: none;
 }
 
 .win-screen {
@@ -34,15 +44,21 @@ button {
 
 .play-area {
     display: flex;
-    justify-content: space-between;
-    width: 25%;
+    justify-content: space-evenly;
+    width: 400px;
     margin: auto;
     margin-top: 50px;
     text-align: center;
-    border: 1px solid black;
     border-radius: 1rem;
     padding-left: 25px;
     padding-right: 25px;
+}
+
+.play-area #versus {
+    font-weight: bold;
+    color: rgb(0, 0, 0);
+    font-size: 25px;
+    margin-top: 75px;
 }
 
 .results {
@@ -65,7 +81,14 @@ button {
     margin-left: 10px;
     margin-right: 10px;
     padding: 10px 50px 10px 50px;
+    border: 1px solid transparent;
+    box-shadow: 0px 0px 3px grey;
     border-radius: 1rem;
+    background-color: white;
+}
+
+#play-buttons button:hover {
+    background-color: rgb(241, 241, 241);
 }
 
 #play-buttons button:focus {
@@ -81,8 +104,8 @@ button {
 
 .score-box {
     margin: auto;
-    margin-top: 25px;
-    border: 1px solid black;
+    margin-top: 35px;
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
     border-radius: 1rem;
     width: 300px;
     height: 200px;
@@ -90,7 +113,10 @@ button {
 
 .score-box h2 {
     text-align: center;
-    text-decoration: underline;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    background: rgba(0, 119, 255, 0.89);
+    color: white;
 }
 
 .player-names {
@@ -98,7 +124,7 @@ button {
     justify-content: space-between;
 }
 
-.player-names #human {
+.player-names #player {
     font-weight: bold;
     margin-left: 50px;
 }
@@ -113,7 +139,7 @@ button {
     justify-content: space-between;
 }
 
-#human-score {
+#player-score {
     text-align: center;
     line-height: 50px;
     margin-left: 50px;
@@ -138,4 +164,26 @@ button {
     flex-direction: row;
     justify-content: center;
     margin-top: 25px;
+}
+
+#reset-button button {
+    border-radius: 10px;
+    border: 1px solid transparent;
+    box-shadow: 0px 0px 3px grey;
+    background-color: rgba(15, 109, 163, 0.801);
+    color: white;
+}
+
+#reset-button button:hover {
+    background-color: rgba(23, 98, 141, 0.801);;
+}
+
+#reset-button button:focus {
+    outline: none;
+}
+
+.win-indicator {
+    border: 1px solid transparent;
+    border-radius: 50%;
+    box-shadow: 0px 0px 3px rgb(6, 190, 6);
 }

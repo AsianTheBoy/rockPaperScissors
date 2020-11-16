@@ -12,7 +12,6 @@
         <label for="num-games">Number of Games</label>
 
         <select name="num-games" id="num-games" onchange = 'reset()'>
-            <option value = '1'>1</option>
             <option value = '3'>3</option>
             <option value = '5'>5</option>
             <option value = '7'>7</option>
@@ -22,8 +21,6 @@
     <div class = 'win-screen'></div>
 
     <div class = 'main'>
-
-        <h2>Choose One</h2>
 
         <div id='play-buttons'>
             <button type = "button" onclick = "game(this)" value = 'Rock'><img src = 'rock.png'></button>
@@ -38,6 +35,8 @@
                 <p id = 'player-choice'></p>
             </div>
 
+            <p id = 'versus'>VS</p>
+
             <div>
                 <h3>Computer Choice</h3>
                 <p id = 'computer-choice'></p>
@@ -45,25 +44,24 @@
 
         </div>
 
-        <div >
-            <div class = 'results'></div>
+    </div>
+
+        <div >    
             <div class = 'score-box'>
                 <h2>Score</h2>
 
                 <div class = 'player-names'>
-                    <p id = 'human'>Human</p>
+                    <p id = 'player'>Player</p>
                     <p id = 'computer'>Computer</p>
                 </div>
                 
                 <div class = 'scores'>
                     
-                    <p id = 'human-score'>0</p>
+                    <p id = 'player-score'>0</p>
                     <p id = 'computer-score'>0</p>
                 </div>
             </div>
         </div>
-
-    </div>
 
         <div id = 'reset-button'>
             <button type = 'button' onClick = "reset()">Reset</button>
@@ -101,22 +99,18 @@
             let playerPoints = 0;
             let computerPoints = 0;
 
-            const container = document.querySelector('.results');
-            container.textContent = "";
-
-            const human_score = document.querySelector('#human-score');
+            const player_score = document.querySelector('#player-score');
             const computer_score = document.querySelector('#computer-score');
 
-            const human_choice = document.querySelector('#player-choice');
-            human_choice.textContent = "";
+            const player_choice = document.querySelector('#player-choice');
+            player_choice.textContent = "";
+            player_choice.classList.remove('win-indicator')
             const computer_choice = document.querySelector('#computer-choice');
             computer_choice.textContent = "";
+            computer_choice.classList.remove('win-indicator')
 
             const compChoice = document.createElement('p');
             compChoice.classList.add('center-align');
-
-            const results = document.createElement('p');
-            results.classList.add('center-align');
             
             const playerSelection = button_clicked.value;
             const computerSelection = computerPlay();
@@ -125,63 +119,55 @@
 
             result = play(playerSelection, computerSelection);
 
-            human_image = new Image();
+            player_image = new Image();
             computer_image = new Image();
 
             if(result == 1){
                 console.log("You win this round! \nYou chose " + playerSelection + " and the computer chose " + computerSelection);
-                results.textContent = 'You Win';
-                human_image.src = playerSelection.toLowerCase() + '.png';
+                player_image.src = playerSelection.toLowerCase() + '.png';
                 computer_image.src = computerSelection.toLowerCase() + '.png';
-                human_choice.appendChild(human_image);
+                player_choice.appendChild(player_image);
+                player_choice.classList.add('win-indicator');
                 computer_choice.appendChild(computer_image);
-                container.appendChild(compChoice);
-                container.appendChild(results);
-                human_score.textContent = (parseInt(human_score.textContent) + 1).toString()
+                player_score.textContent = (parseInt(player_score.textContent) + 1).toString()
             }
             else if (result == 0){
                 console.log("You lose this round. \nYou chose " + playerSelection + " and the computer chose " + computerSelection);
-                results.textContent = 'You Lose';
-                human_image.src = playerSelection.toLowerCase() + '.png';
+                player_image.src = playerSelection.toLowerCase() + '.png';
                 computer_image.src = computerSelection.toLowerCase() + '.png';
-                human_choice.appendChild(human_image);
+                player_choice.appendChild(player_image);
                 computer_choice.appendChild(computer_image);
-                container.appendChild(compChoice);
-                container.appendChild(results);
+                computer_choice.classList.add('win-indicator');
                 computer_score.textContent = (parseInt(computer_score.textContent) + 1).toString()
             }
             else {
                 console.log("It was a tie!");
-                results.textContent = "It's a tie";
-                human_image.src = playerSelection.toLowerCase() + '.png';
+                player_image.src = playerSelection.toLowerCase() + '.png';
                 computer_image.src = computerSelection.toLowerCase() + '.png';
-                human_choice.appendChild(human_image);
+                player_choice.appendChild(player_image);
                 computer_choice.appendChild(computer_image);
-                container.appendChild(compChoice);
-                container.appendChild(results);
             }
 
-            checkWin(num_games, (parseInt(human_score.textContent)), (parseInt(computer_score.textContent)));
+            checkWin(num_games, (parseInt(player_score.textContent)), (parseInt(computer_score.textContent)));
         }
 
-        function checkWin(num_games, human_wins, computer_wins) {
+        function checkWin(num_games, player_wins, computer_wins) {
 
-            if(num_games - human_wins < human_wins) {
+            if(num_games - player_wins < player_wins) {
                 main = document.querySelector('.main').style.display = "none";
                 win_screen = document.querySelector('.win-screen');
-                win_screen.textContent = 'You Win';
+                win_screen.textContent = 'You Won';
             }
             else if (num_games - computer_wins < computer_wins) {
                 main = document.querySelector('.main').style.display = "none";
                 win_screen = document.querySelector('.win-screen');
-                win_screen.textContent = 'You Lose';
+                win_screen.textContent = 'You Lost';
             }
         }
 
         function reset() {
 
-            const container = document.querySelector('.results');
-            const human_score = document.querySelector('#human-score');
+            const player_score = document.querySelector('#player-score');
             const computer_score = document.querySelector('#computer-score');
 
             main = document.querySelector('.main').style.display = "block";
@@ -189,13 +175,15 @@
             win_screen = document.querySelector('.win-screen');
             win_screen.textContent = '';
     
-            container.textContent = "";
-            human_score.textContent = 0;
+            player_score.textContent = 0;
             computer_score.textContent = 0;
-            const human_choice = document.querySelector('#player-choice');
-            human_choice.textContent = "";
+            const player_choice = document.querySelector('#player-choice');
+            player_choice.textContent = "";
+            player_choice.classList.remove('win-indicator')
             const computer_choice = document.querySelector('#computer-choice');
             computer_choice.textContent = "";
+            computer_choice.classList.remove('win-indicator')
+            
             }
         
     </script>
