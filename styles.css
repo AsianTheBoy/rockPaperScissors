@@ -65,18 +65,18 @@ button {
     font-weight: bold;
 }
 
-#play-buttons {
+.play-buttons {
     margin-top: 25px;
     display: flex;
     flex-direction: row;
     justify-content: center;
 }
 
-#play-buttons h3 {
+.play-buttons h3 {
     margin-left: 20px;
 }
 
-#play-buttons button {
+.play-buttons button {
     margin-top: 25px;
     margin-left: 10px;
     margin-right: 10px;
@@ -87,11 +87,11 @@ button {
     background-color: white;
 }
 
-#play-buttons button:hover {
+.play-buttons button:hover {
     background-color: rgb(241, 241, 241);
 }
 
-#play-buttons button:focus {
+.play-buttons button:focus {
     outline: none;
 }
 

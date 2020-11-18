@@ -22,7 +22,7 @@
 
     <div class = 'main'>
 
-        <div id='play-buttons'>
+        <div class='play-buttons'>
             <button type = "button" onclick = "game(this)" value = 'Rock'><img src = 'rock.png'></button>
             <button type = "button" onclick = "game(this)" value = "Paper"><img src = 'paper.png'></button>
             <button type = "button" onclick = "game(this)" value = 'Scissors'><img src = 'scissors.png'></button>
@@ -42,7 +42,7 @@
                 <p id = 'computer-choice'></p>
             </div>
 
-        </div>
+        </div> 
 
     </div>
 
@@ -154,14 +154,14 @@
         function checkWin(num_games, player_wins, computer_wins) {
 
             if(num_games - player_wins < player_wins) {
-                main = document.querySelector('.main').style.display = "none";
+                main = document.querySelector('.play-buttons').style.display = "none";
                 win_screen = document.querySelector('.win-screen');
-                win_screen.textContent = 'You Won';
+                win_screen.textContent = 'You Won!';
             }
             else if (num_games - computer_wins < computer_wins) {
-                main = document.querySelector('.main').style.display = "none";
+                main = document.querySelector('.play-buttons').style.display = "none";
                 win_screen = document.querySelector('.win-screen');
-                win_screen.textContent = 'You Lost';
+                win_screen.textContent = 'You Lost.';
             }
         }
 
@@ -170,7 +170,7 @@
             const player_score = document.querySelector('#player-score');
             const computer_score = document.querySelector('#computer-score');
 
-            main = document.querySelector('.main').style.display = "block";
+            main = document.querySelector('.play-buttons').style.display = "flex";
 
             win_screen = document.querySelector('.win-screen');
             win_screen.textContent = '';
